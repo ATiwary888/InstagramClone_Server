@@ -1,6 +1,6 @@
 import express from 'express';
 
-import { getPosts,createPost, updatePost, deletePost, likePost} from '../controllers/post.js';
+import { getPosts,createPost, loginUser, updatePost, deletePost, likePost, createUser} from '../controllers/post.js';
 
 const router = express.Router();
 
@@ -9,6 +9,7 @@ router.post('/',createPost);
 router.patch('/:id',updatePost);
 router.delete('/:id',deletePost);
 router.patch('/:id/likePost',likePost);
-
+router.post('/login',loginUser);
+router.post('/creat',createUser);
 export default router;
 
