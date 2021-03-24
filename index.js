@@ -42,7 +42,5 @@ mongoose.connect(process.env.CONNECTION_URL,{useNewUrlParser:true,useUnifiedTopo
 
 mongoose.set('useFindAndModify',false);
 
-// app.listen(port,() => {
-//     console.log("Server running");
-// })
+
 
