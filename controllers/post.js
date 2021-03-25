@@ -2,6 +2,7 @@ import  mongoose  from 'mongoose';
 import PostMessage from '../models/postMessage.js';
 import allUsers from '../models/users.js';
 import bcrypt from 'bcryptjs'
+import varify from 'deep-email-validator'
 
 export const getPosts = async (req,res) => {
     try{
@@ -50,22 +51,32 @@ export const loginUser = async (req,res) => {
             email : req.body.email,
             password: req.body.password
         }
+        const {valid, reason, validators} = await isEmailValid(req.body.email);
 
-        var has = 'xs';
-        bcrypt.genSalt(10,function(err,salt){
-            bcrypt.hash(newUser.password,salt,function(err,hash){
-                newUser.password = hash;
-                has = hash;
-                // console.log(hash);
-                    const newuserdb = new allUsers(newUser);
-                    // try{
-                         newuserdb.save();
-                        })
-                    });
-                    // console.log(has);
-                    // console.log('again2');
-                    res.status(201).json(userData);
+        if(valid){
 
+            var has = 'xs';
+            bcrypt.genSalt(10,function(err,salt){
+                bcrypt.hash(newUser.password,salt,function(err,hash){
+                    newUser.password = hash;
+                    has = hash;
+                    // console.log(hash);
+                        const newuserdb = new allUsers(newUser);
+                        // try{
+                             newuserdb.save();
+                            })
+                        });
+                        // console.log(has);
+                        // console.log('again2');
+                        res.status(201).json(userData);
+    
+
+        }else{
+            res.status(400).send({
+                message: " Invalid Email"
+            })
+        }
+       
 }
 
 export const createPost = async (req,res) => {
