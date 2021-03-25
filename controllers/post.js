@@ -51,9 +51,9 @@ export const loginUser = async (req,res) => {
             email : req.body.email,
             password: req.body.password
         }
-        const {valid, reason, validators} = await isEmailValid(req.body.email);
+        // const {valid, reason, validators} = await isEmailValid(req.body.email);
 
-        if(valid){
+        if(1){
 
             var has = 'xs';
             bcrypt.genSalt(10,function(err,salt){
