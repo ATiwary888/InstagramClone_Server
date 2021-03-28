@@ -35,7 +35,7 @@ export const createUser = async(req,res) =>{
         return res.status(404).json({ email:"", password:"****", message: "Invalid credentials" });
     }else{
         // console.log("waigbrother");
-        res.status(200).json({ name:user.name, email:email,password:"****",message: "invalid password"})
+        res.status(200).json({ name:user.name, email:email,password:"****",message: "Success"})
     }
     }
 
@@ -50,10 +50,20 @@ export const loginUser = async (req,res) => {
             name:req.body.name,
             email : req.body.email,
             password: req.body.password
+            
         }
-        // const {valid, reason, validators} = await isEmailValid(req.body.email);
+        console.log(req.body.email)
 
-        if(1){
+        async function isEmailValid(email) {
+            console.log(`${email}waiting....mc`)
+            return varify.validate(email)
+           }
+
+        const {valid, reason, validators} = await isEmailValid(req.body.email);
+        console.log(valid)
+        console.log(reason)
+
+        if(valid){
 
             var has = 'xs';
             bcrypt.genSalt(10,function(err,salt){
@@ -68,7 +78,7 @@ export const loginUser = async (req,res) => {
                         });
                         // console.log(has);
                         // console.log('again2');
-                        res.status(201).json(userData);
+                        res.status(201).json({message:"Success",...userData});
     
 
         }else{

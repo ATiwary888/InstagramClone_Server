@@ -35,7 +35,9 @@ app.get('/',(req,res)=>{
 
 // const CONNECTION_URL = "mongodb+srv://abhay:nopassword@cluster0.cn0tx.mongodb.net/<dbname>?retryWrites=true&w=majority";
 const PORT = process.env.PORT ||5001;
-
+// const CONNECTION_URL ="mongodb://127.0.0.1:27017" 
+// const PORT = 5001
+// process.env.CONNECTION_URL
 mongoose.connect(process.env.CONNECTION_URL,{useNewUrlParser:true,useUnifiedTopology:true})
 .then(()=> app.listen(PORT,()=> console.log('Server is running cool!')))
 .catch((error)=>console.log(error.message));
